@@ -76,6 +76,13 @@ const resetBoard = assign({
   lastWinner: () => null
 });
 
+const resetScore = assign({
+  score: () => ({
+    x: 0,
+    o: 0
+  })
+});
+
 const ticTacToeMachine = createMachine({
   id: 'ticTactToe',
   initial: 'onGame',
@@ -101,7 +108,10 @@ const ticTacToeMachine = createMachine({
             cond: 'isValidMove',
             actions: 'updateBoard'
           }
-        ]
+        ],
+        RESET_SCORE: [{
+          actions: 'resetScore'
+        }]
       }
     },
     win: {
@@ -127,6 +137,7 @@ const ticTacToeMachine = createMachine({
   actions: {
     updateScore,
     resetBoard,
+    resetScore,
     updateBoard,
     setWinner
   }
