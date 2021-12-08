@@ -105,21 +105,9 @@ const ticTacToeMachine = createMachine({
       }
     },
     win: {
-      on: {
-        ANOTHER_ROUND: {
-          target: 'onGame'
-        }
-      },
-      exit: ['updateScore', 'resetBoard']
+      exit: ['updateScore']
     },
-    draw: {
-      on: {
-        ANOTHER_ROUND: {
-          target: 'onGame'
-        }
-      },
-      exit: ['resetBoard']
-    }
+    draw: { }
   },
   on:{
     RESET: {

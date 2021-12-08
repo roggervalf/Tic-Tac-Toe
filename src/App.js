@@ -316,7 +316,7 @@ const App = () => {
           </Modal.Header>
           
           <Modal.Footer className="text-center">
-            <Button variant="warning" onClick={() => send('ANOTHER_ROUND')}>
+            <Button variant="warning" onClick={() => send('RESET')}>
               Another Round
             </Button>
           </Modal.Footer>
