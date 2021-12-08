@@ -101,11 +101,7 @@ const ticTacToeMachine = createMachine({
             cond: 'isValidMove',
             actions: 'updateBoard'
           }
-        ],
-        onResetBoard: {
-          target: 'onGame',
-          actions: 'resetBoard'
-        }
+        ]
       }
     },
     win: {
@@ -123,6 +119,14 @@ const ticTacToeMachine = createMachine({
         }
       },
       exit: ['resetBoard']
+    }
+  },
+  on:{
+    RESET: {
+      actions: [
+        'resetBoard'
+      ],
+     target: 'onGame'
     }
   }
 },

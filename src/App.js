@@ -407,7 +407,7 @@ const App = () => {
         
 
         <div className="mt-4">
-          <Button size="sm" variant="warning" className="mr-4" onClick={(_) => send({ type: "onResetBoard" })}>Reset Board</Button>
+          <Button size="sm" variant="warning" className="mr-4" onClick={(_) => send({ type: "RESET" })}>Reset Board</Button>
           <Button size="sm" variant="warning" className="mr-4" onClick={resetScore}>Reset Score</Button>
           <Button size="sm" variant="danger" onClick={handleShow2}>Edit / Remove Players</Button>
         </div>
