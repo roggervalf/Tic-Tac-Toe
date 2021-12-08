@@ -95,7 +95,7 @@ const ticTacToeMachine = createMachine({
           { target: 'win', cond: 'evaluateWin', actions: 'setWinner' },
           { target: 'draw', cond: 'evaluateDraw' }
         ],
-        ONCLICK: [
+        ON_CLICK: [
           {
             target: 'onGame',
             cond: 'isValidMove',
@@ -106,7 +106,7 @@ const ticTacToeMachine = createMachine({
     },
     win: {
       on: {
-        anotherRound: {
+        ANOTHER_ROUND: {
           target: 'onGame'
         }
       },
@@ -114,7 +114,7 @@ const ticTacToeMachine = createMachine({
     },
     draw: {
       on: {
-        anotherRound: {
+        ANOTHER_ROUND: {
           target: 'onGame'
         }
       },

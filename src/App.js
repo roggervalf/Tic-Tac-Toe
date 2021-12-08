@@ -36,12 +36,16 @@ function generateBoardBoxClassName(index){
 }
 
 const App = () => {
-  const [current, send] = useMachine(ticTacToeMachine);
-  const { score,
-  whosPlaying,lastWinner,
-  board
- } = current.context;
- console.log("Global context: ", current.context);
+    const [current, send] = useMachine(ticTacToeMachine);
+    const { 
+      score,
+      whosPlaying,
+      lastWinner,
+      board
+    } = current.context;
+    console.log("current", current.context);
+
+    
     const [xTurn, setXTurn] = useState(true);
     const [oTurn, setOTurn] = useState(false);
     const [whoWin, setWhoWin] = useState('');
@@ -50,7 +54,6 @@ const App = () => {
     const [timesClicked, setTimesClicked] = useState(0);
     const [playerx, setPlayerX] = useState('No player');
     const [playero, setPlayerO] = useState('No player');
-    const [isDoneLoading, setIsDoneLoading] = useState(false);
 
     const [playernamex, setPlayerNameX] = useState('No player');
     const [playernameo, setPlayerNameO] = useState('No player');
@@ -63,7 +66,6 @@ const App = () => {
     console.log(`whoWin: ${whoWin}`)
     console.log(`playerx: ${playerx}`)
     console.log(`playero: ${playero}`)
-    console.log(`isDoneLoading: ${isDoneLoading}`)
 
 
     const [show, setShow] = useState(false);
@@ -256,152 +258,40 @@ const App = () => {
           <div className="pr-5 mr-5">
             <p className="text-center">{playernamex}</p>
             <h5 className="text-center"><img className="xturn pb-1" src={wrongMark} /> Score:</h5>
-            <h5 className="text-center">{xPoint}</h5>
+            <h5 className="text-center">{score.x}</h5>
           </div>
 
           <div className="mr-5 ml-5 mb-5">
           <Table borderless className="w-25">
             <div className="text-center table-board">
              
-            {range(9).map((i) => {
-            return (
-              <div
-                key={i}
-                className = {generateBoardBoxClassName(i)}
-                onClick={(_) => send({ type: "ONCLICK", whosPlaying, value: i })}
-              >
-                {
-                      (board[i]==='x') ?
-                        <img src={wrongMark} />
-                      :
-                        (board[i]==='o') ?
-                          <img src={circle} />
-                        :
-                          <img src={white} />
-                    }
-              </div>
-            );
-          })}
-          </div>
+              {range(9).map((i) => {
+                return (
+                  <div
+                    key={i}
+                    className = {generateBoardBoxClassName(i)}
+                    onClick={() => send({ type: "ON_CLICK", whosPlaying, value: i })}
+                  >
+                    {
+                          (board[i] === 'x') ?
+                            <img src={wrongMark} />
+                          :
+                            (board[i] === 'o') ?
+                              <img src={circle} />
+                            :
+                              <img src={white} />
+                        }
+                  </div>
+                );
+              })}
+            </div>
           </Table>
-            <Table borderless className="w-25">
-              <tbody className="text-center">
-                <tr className="border-bottom">
-                  <td className="border-right" onClick={() => changeTurn(xr1c1, or1c1, setXR1C1, setOR1C1)}>
-                    {
-                      (xr1c1.status) ?
-                        <img src={wrongMark} />
-                      :
-                        (or1c1.status) ?
-                          <img src={circle} />
-                        :
-                          <img src={white} />
-                    }
-                  </td>
-                  <td className="border-right" onClick={() => changeTurn(xr1c2, or1c2, setXR1C2, setOR1C2)}>
-                    {
-                      (xr1c2.status) ?
-                        <img src={wrongMark} />
-                      :
-                        (or1c2.status) ?
-                          <img src={circle} />
-                        :
-                          <img src={white} />
-                    }
-                  </td>
-                  <td onClick={() => changeTurn(xr1c3, or1c3, setXR1C3, setOR1C3)}>
-                    {
-                      (xr1c3.status) ?
-                        <img src={wrongMark} />
-                      :
-                        (or1c3.status) ?
-                          <img src={circle} />
-                        :
-                          <img src={white} />
-                    }
-                  </td>
-                </tr>
-                <tr className="border-bottom">
-                  <td className="border-right" onClick={() => changeTurn(xr2c1, or2c1, setXR2C1, setOR2C1)}>
-                    {
-                      (xr2c1.status) ?
-                        <img src={wrongMark} />
-                      :
-                        (or2c1.status) ?
-                          <img src={circle} />
-                        :
-                          <img src={white} />
-                    }
-                  </td>
-                  <td className="border-right" onClick={() => changeTurn(xr2c2, or2c2, setXR2C2, setOR2C2)}>
-                    {
-                      (xr2c2.status) ?
-                        <img src={wrongMark} />
-                      :
-                        (or2c2.status) ?
-                          <img src={circle} />
-                        :
-                          <img src={white} />
-                    }
-                  </td>
-                  <td onClick={() => changeTurn(xr2c3, or2c3, setXR2C3, setOR2C3)}>
-                    {
-                      (xr2c3.status) ?
-                        <img src={wrongMark} />
-                      :
-                        (or2c3.status) ?
-                          <img src={circle} />
-                        :
-                          <img src={white} />
-                    }
-                  </td>
-                  
-                </tr>
-                <tr>
-                  <td className="border-right" onClick={() => changeTurn(xr3c1, or3c1, setXR3C1, setOR3C1)}>
-                    {
-                      (xr3c1.status) ?
-                        <img src={wrongMark} />
-                      :
-                        (or3c1.status) ?
-                          <img src={circle} />
-                        :
-                          <img src={white} />
-                    }
-                  </td>
-                  <td className="border-right" onClick={() => changeTurn(xr3c2, or3c2, setXR3C2, setOR3C2)}>
-                    {
-                      (xr3c2.status) ?
-                        <img src={wrongMark} />
-                      :
-                        (or3c2.status) ?
-                          <img src={circle} />
-                        :
-                          <img src={white} />
-                    }
-                  </td>
-                  <td onClick={() => changeTurn(xr3c3, or3c3, setXR3C3, setOR3C3)}>
-                    {
-                      (xr3c3.status) ?
-                        <img src={wrongMark} />
-                      :
-                        (or3c3.status) ?
-                          <img src={circle} />
-                        :
-                          <img src={white} />
-                    }
-                  </td>
-                  
-                </tr>
-                
-              </tbody>
-            </Table>
           </div>
 
           <div className="ml-5 pl-5">
             <p className="text-center">{playernameo}</p>
             <h5 className="text-center pb-1"><img className="oturn" src={circle} /> Score:</h5>
-            <h5 className="text-center">{oPoint}</h5>
+            <h5 className="text-center">{score.o}</h5>
           </div>
         </div>
         
@@ -426,7 +316,7 @@ const App = () => {
           </Modal.Header>
           
           <Modal.Footer className="text-center">
-            <Button variant="warning" onClick={(_) => send({ type: "anotherRound" })}>
+            <Button variant="warning" onClick={() => send('ANOTHER_ROUND')}>
               Another Round
             </Button>
           </Modal.Footer>
