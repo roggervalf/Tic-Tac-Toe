@@ -4,7 +4,12 @@ import circle from './images/circle.png';
 import white from './images/white.png';
 import { ticTacToeMachine } from "./machine";
 import { useMachine } from "@xstate/react";
+import { inspect } from '@xstate/inspect';
 import './App.css';
+
+inspect({
+  iframe: false
+});
 
 function range(length) {
   return Array(length)
@@ -35,7 +40,7 @@ function generateBoardBoxClassName(index){
 }
 
 const App = () => {
-    const [current, send] = useMachine(ticTacToeMachine);
+    const [current, send] = useMachine(ticTacToeMachine, {devTools:true});
     const { 
       score,
       whosPlaying,
