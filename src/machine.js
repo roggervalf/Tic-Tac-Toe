@@ -1,5 +1,4 @@
 import { createMachine, assign } from 'xstate';
-import { assert } from 'chai';
 
 const evaluateWin = (ctx) => {
   const { board } = ctx;
@@ -85,7 +84,7 @@ const resetScore = assign({
 });
 
 const ticTacToeMachine = createMachine({
-  id: 'ticTactToe',
+  id: 'ticTacToe',
   initial: 'onGame',
   context: {
     score: {
@@ -113,11 +112,6 @@ const ticTacToeMachine = createMachine({
         RESET_SCORE: [{
           actions: 'resetScore'
         }]
-      },
-      meta: {
-        test: ({ getByTestId }) => {
-          assert.ok( getByTestId('abc'));
-        }
       }
     },
     win: {
@@ -135,7 +129,7 @@ const ticTacToeMachine = createMachine({
   }
 },
 {
-  guards: {
+  guards: {
     evaluateWin,
     evaluateDraw,
     isValidMove
