@@ -4,12 +4,12 @@ import circle from './images/circle.png';
 import white from './images/white.png';
 import { ticTacToeMachine } from "./machine";
 import { useMachine } from "@xstate/react";
-import { inspect } from '@xstate/inspect';
+// import { inspect } from '@xstate/inspect';
 import './App.css';
 
-inspect({
+/*inspect({
   iframe: false
-});
+});*/
 
 function range(length) {
   return Array(length)
@@ -106,8 +106,8 @@ const App = () => {
         
 
         <div className="mt-4">
-          <Button size="sm" variant="warning" className="mr-4" onClick={() => send({ type: "RESET" })}>Reset Board</Button>
-          <Button size="sm" variant="warning" className="mr-4" onClick={() => send('RESET_SCORE')}>Reset Score</Button>
+          <Button size="sm" variant="warning" data-testid="reset-board" className="mr-4" onClick={() => send({ type: "RESET" })}>Reset Board</Button>
+          <Button size="sm" variant="warning" data-testid="reset-score" className="mr-4" onClick={() => send('RESET_SCORE')}>Reset Score</Button>
         </div>
 
         <Modal show={current.matches("win") || current.matches("draw")}>
